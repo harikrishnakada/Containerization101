@@ -2,8 +2,8 @@
 # Build and push an image to Azure Container Registry
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
-# trigger:
-# - master
+trigger:
+- azure-pipelines
 
 resources:
 - repo: self
@@ -11,6 +11,7 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '8913e121-dc09-4c23-bee8-ee0d1b8dfb8b'
+  azureSubscriptionServiceConnection: 'learning-hub-sc'
   imageRepository: 'blazorserverapp'
   containerRegistry: 'acrdemohk.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Samples/BlazorServerApp/BlazorServerApp/Dockerfile'
@@ -37,3 +38,21 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+      
+# - stage : Deploy
+#   displayName: Deploy stage
+#   jobs:
+#   - job: Deploy
+#     displayName: Deploy
+#     pool:
+#       vmImage: $(vmImageName)
+#     steps: 
+#     - task: AzureRmWebAppDeployment@4
+#       inputs:
+#         ConnectionType: 'AzureRM'
+#         azureSubscription: '$(azureSubscriptionServiceConnection)'
+#         appType: 'webAppContainer'
+#         WebAppName: 'container-web-app'
+#         DockerNamespace: 'acrdemohk'
+#         DockerRepository: 'blazorserverapp'
+#         DockerImageTag: '$(Build.BuildId)'
