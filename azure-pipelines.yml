@@ -39,20 +39,20 @@ stages:
         tags: |
           $(tag)
       
-# - stage : Deploy
-#   displayName: Deploy stage
-#   jobs:
-#   - job: Deploy
-#     displayName: Deploy
-#     pool:
-#       vmImage: $(vmImageName)
-#     steps: 
-#     - task: AzureRmWebAppDeployment@4
-#       inputs:
-#         ConnectionType: 'AzureRM'
-#         azureSubscription: '$(azureSubscriptionServiceConnection)'
-#         appType: 'webAppContainer'
-#         WebAppName: 'container-web-app'
-#         DockerNamespace: 'acrdemohk'
-#         DockerRepository: 'blazorserverapp'
-#         DockerImageTag: '$(Build.BuildId)'
+- stage : Deploy
+  displayName: Deploy stage
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    steps: 
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: '$(azureSubscriptionServiceConnection)'
+        appType: 'webAppContainer'
+        WebAppName: 'container-web-app'
+        DockerNamespace: 'acrdemohk'
+        DockerRepository: 'blazorserverapp'
+        DockerImageTag: '$(Build.BuildId)'
