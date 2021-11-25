@@ -53,6 +53,6 @@ stages:
         azureSubscription: '$(azureSubscriptionServiceConnection)'
         appType: 'webAppContainer'
         WebAppName: 'container-web-app'
-        DockerNamespace: 'acrdemohk'
+        DockerNamespace: 'acrdemohk.azurecr.io'
         DockerRepository: 'blazorserverapp'
         DockerImageTag: '$(Build.BuildId)'
